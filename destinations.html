@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner - ExploreDest</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet JS & CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="index.html">ExploreDest</a></div>
+            <ul class="nav-links">
+                <li><a href="destinations.html">Plan a Trip</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); padding: 100px 20px;">
+        </section>
+
+        <!-- Glassmorphism Planner Form -->
+        <div class="trip-planner">
+            <div class="input-group">
+                <label>📍 Starting City</label>
+                <div style="display:flex; align-items:center;">
+                    <input type="text" id="startCity" placeholder="e.g. Jalandhar">
+                    <button class="icon-btn" onclick="getUserLocation()" title="Use GPS">🧭</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>📅 Days</label>
+                <input type="number" id="tripDays" placeholder="e.g. 3">
+            </div>
+            <div class="input-group">
+                <label>💰 Total Budget</label>
+                <input type="number" id="totalBudget" placeholder="e.g. 8000">
+            </div>
+            <div class="input-group" style="min-width: 100px;">
+                <label>💱 Currency</label>
+                <select id="currencySelect">
+                    <option value="INR">INR (₹)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                </select>
+            </div>
+            <button class="cta-btn" onclick="planMyTrip()">Generate Trip</button>
+        </div>
+
+        <!-- ADDED: This is where the Leaflet Map and the Destination Cards will be injected -->
+        <section class="section-container">
+            <div id="map"></div>
+            <div id="destinations-container" class="destination-cards"></div>
+        </section>
+
+        <!-- The Tour Guide Popup -->
+        <div id="guideModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeGuideModal()">&times;</span>
+                <h2 id="guideTitle" style="color:var(--primary); text-align:center; margin-bottom:20px;">Your Trip</h2>
+                
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <h3>🚌 Transport Logic</h3>
+                        <p id="guideTransport"></p>
+                    </div>
+                    <div class="guide-card">
+                        <h3>💸 Financial Breakdown</h3>
+                        <p id="guideBudget"></p>
+                    </div>
+                </div>
+
+                <div class="guide-grid">
+                    <div class="guide-card" style="flex: 2;">
+                        <h3>🗺️ Itinerary & Hidden Gems</h3>
+                        <ul id="guideGems" class="gems-list"></ul>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <h3>🌤️ 7-Day Live Weather</h3>
+                    <div id="weatherForecast" class="weather-grid"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ExploreDest. Built for Students, By Students.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
