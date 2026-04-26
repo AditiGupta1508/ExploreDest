@@ -414,30 +414,37 @@ function getTransport(distanceKM) {
 // Finds single destinations OR combinations of 2 that fit the days
 function findTripOptions(affordableDestinations, totalDays, filter) {
 
-    // Apply domestic / international filter
     let pool = affordableDestinations;
     if (filter === "domestic") pool = affordableDestinations.filter(d => d.country === "India");
     if (filter === "international") pool = affordableDestinations.filter(d => d.country !== "India");
 
     let options = [];
 
-    // Option A: Single destination that fits days perfectly (within ±1 day)
+    // Option A: Single destination that fits days (within ±1 day)
     pool.forEach(dest => {
         if (Math.abs(dest.recommendedDays - totalDays) <= 1) {
             options.push({ type: "single", destinations: [dest] });
         }
     });
 
-    // Option B: Two destinations that combine to fit total days (within ±1 day)
+    // Option B: Two destinations — BOTH days AND combined budget must fit
     for (let i = 0; i < pool.length; i++) {
         for (let j = i + 1; j < pool.length; j++) {
-            const combined = pool[i].recommendedDays + pool[j].recommendedDays;
-            if (Math.abs(combined - totalDays) <= 1) {
-                options.push({ type: "multi", destinations: [pool[i], pool[j]] });
+            const combinedDays = pool[i].recommendedDays + pool[j].recommendedDays;
+            const combinedCost = pool[i].totalCostUSD + pool[j].totalCostUSD;
+            const userBudgetUSD = pool[i].totalCostUSD + pool[i].leftoverUSD; // reconstruct total budget
+
+            const daysMatch = Math.abs(combinedDays - totalDays) <= 1;
+            const budgetFits = combinedCost <= userBudgetUSD;
+
+            if (daysMatch && budgetFits) {
+                options.push({ 
+                    type: "multi", 
+                    destinations: [pool[i], pool[j]] 
+                });
             }
         }
     }
-
     return options;
 }
 
