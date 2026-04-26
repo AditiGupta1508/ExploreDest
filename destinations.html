@@ -51,6 +51,15 @@
                 </select>
             </div>
             <button class="cta-btn" onclick="planMyTrip()">Generate Trip</button>
+
+            <div class="input-group" style="min-width: 130px;">
+                <label>🌍 Travel Type</label>
+                <select id="travelFilter">
+                    <option value="all">All Destinations</option>
+                    <option value="domestic">🇮🇳 India Only</option>
+                    <option value="international">✈️ International</option>
+                </select>
+            </div>
         </div>
 
         <!-- ADDED: This is where the Leaflet Map and the Destination Cards will be injected -->
@@ -92,7 +101,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 ExploreDest. Built for Students, By Students.</p>
+        <p>&copy; 2024 ExploreDest. Built for Students, By a Student.</p>
     </footer>
 
     <script src="app.js"></script>
