@@ -56,6 +56,19 @@
                     <option value="international">✈️ International</option>
                 </select>
             </div>
+            <div class="input-group" style="min-width: 150px;">
+                <label>🎯 Vibe</label>
+                <select id="vibeFilter">
+                    <option value="all">Any Vibe</option>
+                    <option value="beach">🏖️ Beach & Chill</option>
+                    <option value="mountains">🏔️ Mountains & Trek</option>
+                    <option value="party">🎉 Party & Nightlife</option>
+                    <option value="backpacker">🎒 Backpacker Budget</option>
+                    <option value="city">🌆 City Explorer</option>
+                    <option value="nature">🌿 Nature & Wildlife</option>
+                    <option value="history">🏛️ History & Culture</option>
+                </select>
+            </div>
             <button class="cta-btn" onclick="planMyTrip()">Generate Trip</button>
         </div>
 
@@ -100,6 +113,8 @@
         <p>&copy; 2025 ExploreDest. Built for Students, By a Student.</p>
     </footer>
 
+    <!-- Load data first, then logic -->
+    <script src="destinations.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
